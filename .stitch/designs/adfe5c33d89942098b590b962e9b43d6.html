@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Input Transaksi - CuanTracker</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "error": "#ba1a1a",
+                      "surface-container": "#eceef0",
+                      "inverse-surface": "#2d3133",
+                      "on-primary-fixed": "#131b2e",
+                      "on-primary": "#ffffff",
+                      "background": "#f7f9fb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary-fixed-variant": "#3f465c",
+                      "on-tertiary-fixed-variant": "#930013",
+                      "on-tertiary-container": "#ef4444",
+                      "on-secondary-fixed": "#002113",
+                      "inverse-on-surface": "#eff1f3",
+                      "tertiary-fixed": "#ffdad7",
+                      "surface-variant": "#e0e3e5",
+                      "outline": "#76777d",
+                      "surface-tint": "#565e74",
+                      "secondary-container": "#6cf8bb",
+                      "tertiary-container": "#410004",
+                      "surface-dim": "#d8dadc",
+                      "inverse-primary": "#bec6e0",
+                      "on-secondary-fixed-variant": "#005236",
+                      "primary": "#000000",
+                      "tertiary-fixed-dim": "#ffb3ad",
+                      "secondary": "#006c49",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "primary-fixed-dim": "#bec6e0",
+                      "on-surface": "#191c1e",
+                      "on-secondary-container": "#00714d",
+                      "on-primary-container": "#7c839b",
+                      "secondary-fixed-dim": "#4edea3",
+                      "surface-container-highest": "#e0e3e5",
+                      "tertiary": "#000000",
+                      "surface": "#f7f9fb",
+                      "primary-fixed": "#dae2fd",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f2f4f6",
+                      "on-surface-variant": "#45464d",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#6ffbbe",
+                      "surface-bright": "#f7f9fb",
+                      "primary-container": "#131b2e",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed": "#410004",
+                      "on-background": "#191c1e",
+                      "outline-variant": "#c6c6cd",
+                      "surface-container-high": "#e6e8ea"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "xl": "32px",
+                      "container-max": "1280px",
+                      "md": "16px",
+                      "xs": "4px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body {
+            background-color: #f7f9fb;
+            font-family: 'Inter', sans-serif;
+            color: #191c1e;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid #E2E8F0;
+        }
+        .custom-shadow {
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 1px 2px rgba(0,0,0,0.03);
+        }
+        .focus-ring:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col p-md z-50">
+<div class="flex items-center gap-sm mb-xl">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">CuanTracker</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Financial Wellness</p>
+</div>
+</div>
+<nav class="flex-1 space-y-sm">
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Active State: Transactions -->
+<a class="flex items-center gap-sm px-md py-sm bg-secondary-container text-on-secondary-container font-bold rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span>Transaksi</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span>Laporan Bulanan</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span>Laporan Tahunan</span>
+</a>
+</nav>
+<div class="mt-auto pt-md border-t border-outline-variant space-y-sm">
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Pengaturan</span>
+</a>
+<a class="flex items-center gap-sm px-md py-sm text-on-surface-variant hover:bg-surface-container transition-all rounded-lg font-label-md text-label-md text-error" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1 flex flex-col min-h-screen relative">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-40 bg-surface border-b border-outline-variant shadow-sm px-lg py-sm flex justify-between items-center h-16">
+<h2 class="text-headline-md font-headline-md font-bold text-primary">Input Transaksi</h2>
+<div class="flex items-center gap-md">
+<div class="flex items-center gap-sm">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="h-8 w-px bg-outline-variant mx-sm"></div>
+<div class="flex items-center gap-sm">
+<div class="text-right hidden sm:block">
+<p class="font-label-md text-label-md text-primary">Alex Freeman</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Premium User</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A professional studio portrait of a mid-30s male with a clean-cut appearance, wearing a dark navy polo shirt. He has a warm, confident smile and is positioned against a soft, out-of-focus modern office background with neutral gray and white tones. The lighting is bright and professional, evoking trust and financial success, consistent with a premium corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeuoS1uVHdstIy2dWB3mSlur1kC3xuoop3O6SZiRk5gGVBV5kqcRGouAekxu6nc6x6VNEN8CoW0hat5VyxoRDuTwE7L1ydhBqgmaooKaXC0X1DY9TubpzAQXewz-Rb8D7XmP2PYWO-LKw9iU6cuw7932HWtpesOmn_SYhVz1htzWi2uVdvDdyzRj6ZpjBLoTIkmIk3ugPos4_uroj_UjorBuM7qbP81ULQC8umngxI87zyPbSFEMh6k08hjzLZ3qfRNxxCOv9mrpM"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="flex-1 p-lg flex flex-col items-center justify-start overflow-y-auto">
+<div class="w-full max-w-2xl mb-xl">
+<div class="flex items-center gap-sm text-on-surface-variant mb-md cursor-pointer hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-sm">arrow_back</span>
+<span class="font-label-md text-label-md">Kembali ke Dashboard</span>
+</div>
+<!-- Input Card -->
+<section class="glass-card custom-shadow rounded-xl p-xl w-full">
+<form class="space-y-lg" id="transaction-form">
+<!-- Transaction Type Toggle -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant">Tipe Transaksi</label>
+<div class="grid grid-cols-2 p-1 bg-surface-container-low rounded-lg gap-1">
+<button class="py-sm rounded-lg font-label-md text-label-md transition-all bg-white shadow-sm text-primary" id="type-expense" type="button">
+                                Pengeluaran
+                            </button>
+<button class="py-sm rounded-lg font-label-md text-label-md transition-all text-on-surface-variant hover:bg-white/50" id="type-income" type="button">
+                                Pemasukan
+                            </button>
+</div>
+</div>
+<!-- Amount Field -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="amount">Nominal</label>
+<div class="relative group">
+<span class="absolute left-md top-1/2 -translate-y-1/2 font-headline-sm text-on-surface-variant">Rp</span>
+<input class="w-full pl-14 pr-md py-md bg-white border border-outline-variant rounded-lg font-headline-md text-headline-md text-primary focus-ring transition-all placeholder:text-outline-variant" id="amount" placeholder="0" required="" type="number"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg">
+<!-- Category Field -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="category">Kategori</label>
+<div class="relative">
+<select class="w-full pl-md pr-xl py-md bg-white border border-outline-variant rounded-lg font-body-md text-body-md text-primary focus-ring appearance-none cursor-pointer" id="category">
+<option disabled="" selected="" value="">Pilih Kategori</option>
+<optgroup label="Pemasukan">
+<option>Gaji</option>
+<option>Tukin</option>
+<option>FB Pro</option>
+<option>Flexi BNI</option>
+</optgroup>
+<optgroup label="Pengeluaran">
+<option>Perjadin</option>
+<option>Uang Kos</option>
+<option>Makan</option>
+<option>Transportasi</option>
+<option>Hiburan</option>
+</optgroup>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<!-- Date Field -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="date">Tanggal</label>
+<div class="relative">
+<input class="w-full px-md py-md bg-white border border-outline-variant rounded-lg font-body-md text-body-md text-primary focus-ring transition-all" id="date" type="date"/>
+</div>
+</div>
+</div>
+<!-- Description Field -->
+<div class="space-y-sm">
+<label class="font-label-md text-label-md text-on-surface-variant" for="description">Keterangan</label>
+<textarea class="w-full px-md py-md bg-white border border-outline-variant rounded-lg font-body-md text-body-md text-primary focus-ring transition-all placeholder:text-outline-variant" id="description" placeholder="Contoh: Makan siang di kantor" rows="3"></textarea>
+</div>
+<!-- Action Buttons -->
+<div class="pt-md flex flex-col sm:flex-row gap-md">
+<button class="flex-1 bg-primary text-on-primary font-label-md text-label-md py-md px-xl rounded-lg hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-sm" type="submit">
+<span class="material-symbols-outlined">save</span>
+                            Simpan Transaksi
+                        </button>
+<button class="flex-1 border border-outline-variant text-primary font-label-md text-label-md py-md px-xl rounded-lg hover:bg-surface-container transition-all flex items-center justify-center gap-sm" type="button">
+                            Batal
+                        </button>
+</div>
+</form>
+</section>
+<!-- Contextual Hint Card -->
+<div class="mt-lg p-md bg-secondary-container/30 border border-secondary-container rounded-lg flex items-start gap-md">
+<span class="material-symbols-outlined text-on-secondary-container">info</span>
+<div class="space-y-xs">
+<p class="font-label-md text-label-md text-on-secondary-container">Tips Keuangan</p>
+<p class="font-body-sm text-body-sm text-on-secondary-container/80">Mencatat transaksi segera setelah kejadian membantu Anda menjaga akurasi laporan bulanan hingga 30% lebih baik.</p>
+</div>
+</div>
+</div>
+<!-- Footer Meta -->
+<div class="w-full max-w-2xl text-center pb-xl">
+<p class="font-label-sm text-label-sm text-outline">Terakhir disinkronisasi: Hari ini, 14:20 WIB</p>
+</div>
+</div>
+<!-- Mobile Bottom Nav (for small screens) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant px-md py-sm flex justify-around items-center z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-medium">Beranda</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="text-[10px] font-bold">Input</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px] font-medium">Riwayat</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-medium">Profil</span>
+</a>
+</nav>
+</main>
+<script>
+    const expenseBtn = document.getElementById('type-expense');
+    const incomeBtn = document.getElementById('type-income');
+    const form = document.getElementById('transaction-form');
+
+    expenseBtn.addEventListener('click', () => {
+        expenseBtn.classList.add('bg-white', 'shadow-sm', 'text-primary');
+        expenseBtn.classList.remove('text-on-surface-variant', 'hover:bg-white/50');
+        incomeBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+        incomeBtn.classList.add('text-on-surface-variant', 'hover:bg-white/50');
+    });
+
+    incomeBtn.addEventListener('click', () => {
+        incomeBtn.classList.add('bg-white', 'shadow-sm', 'text-primary');
+        incomeBtn.classList.remove('text-on-surface-variant', 'hover:bg-white/50');
+        expenseBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+        expenseBtn.classList.add('text-on-surface-variant', 'hover:bg-white/50');
+    });
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = e.target.querySelector('button[type="submit"]');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Menyimpan...`;
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            alert('Transaksi Berhasil Disimpan!');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            form.reset();
+            document.getElementById('date').valueAsDate = new Date();
+        }, 1000);
+    });
+
+    document.getElementById('date').valueAsDate = new Date();
+</script>
+</body></html>

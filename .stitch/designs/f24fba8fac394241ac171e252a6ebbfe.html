@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuanTracker - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "surface-container": "#eceef0",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed": "#131b2e",
+                    "on-primary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "on-tertiary-fixed-variant": "#930013",
+                    "on-tertiary-container": "#ef4444",
+                    "on-secondary-fixed": "#002113",
+                    "inverse-on-surface": "#eff1f3",
+                    "tertiary-fixed": "#ffdad7",
+                    "surface-variant": "#e0e3e5",
+                    "outline": "#76777d",
+                    "surface-tint": "#565e74",
+                    "secondary-container": "#6cf8bb",
+                    "tertiary-container": "#410004",
+                    "surface-dim": "#d8dadc",
+                    "inverse-primary": "#bec6e0",
+                    "on-secondary-fixed-variant": "#005236",
+                    "primary": "#000000",
+                    "tertiary-fixed-dim": "#ffb3ad",
+                    "secondary": "#006c49",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "primary-fixed-dim": "#bec6e0",
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#00714d",
+                    "on-primary-container": "#7c839b",
+                    "secondary-fixed-dim": "#4edea3",
+                    "surface-container-highest": "#e0e3e5",
+                    "tertiary": "#000000",
+                    "surface": "#f7f9fb",
+                    "primary-fixed": "#dae2fd",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f2f4f6",
+                    "on-surface-variant": "#45464d",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#6ffbbe",
+                    "surface-bright": "#f7f9fb",
+                    "primary-container": "#131b2e",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed": "#410004",
+                    "on-background": "#191c1e",
+                    "outline-variant": "#c6c6cd",
+                    "surface-container-high": "#e6e8ea"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "base": "4px",
+                    "xl": "32px",
+                    "container-max": "1280px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fb; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tonal-elevation-1 {
+            box-shadow: 0px 1px 3px rgba(0,0,0,0.05), 0px 1px 2px rgba(0,0,0,0.03);
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8e0; border-radius: 10px; }
+    </style>
+</head>
+<body class="text-on-surface bg-background">
+<!-- SideNavBar (Desktop) -->
+<aside class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant p-md z-50">
+<div class="flex items-center gap-sm mb-xl px-sm">
+<div class="w-10 h-10 bg-on-primary-fixed rounded-lg flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">CuanTracker</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kesehatan Finansial</p>
+</div>
+</div>
+<nav class="flex-1 space-y-xs">
+<!-- Active Tab -->
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-label-md text-label-md">Transaksi</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="font-label-md text-label-md">Laporan Bulanan</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+<span class="font-label-md text-label-md">Laporan Tahunan</span>
+</a>
+</nav>
+<div class="mt-auto space-y-xs border-t border-outline-variant pt-md">
+<button class="w-full mb-md bg-on-primary-fixed text-on-primary font-bold py-sm rounded-lg flex items-center justify-center gap-sm hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-md text-label-md">Tambah Transaksi</span>
+</button>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Pengaturan</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-error hover:bg-error-container/10 rounded-lg transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Keluar</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-surface/80 backdrop-blur-md border-b border-outline-variant shadow-sm px-lg py-sm flex justify-between items-center">
+<h2 class="text-headline-md font-headline-md font-bold text-primary">Dashboard</h2>
+<div class="flex items-center gap-md">
+<div class="hidden md:flex items-center bg-surface-container px-md py-xs rounded-full border border-outline-variant">
+<span class="material-symbols-outlined text-on-surface-variant mr-xs">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm font-body-sm text-on-surface w-48" placeholder="Cari analitik..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-xs rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:bg-surface-container-low p-xs rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-px bg-outline-variant mx-xs"></div>
+<div class="flex items-center gap-sm cursor-pointer hover:bg-surface-container-low p-xs rounded-lg transition-colors">
+<div class="w-8 h-8 rounded-full bg-primary-fixed overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a young executive with a friendly expression. The lighting is bright and clean, reflecting a modern corporate aesthetic. The background is a soft, blurred office environment with cool blue and white tones to match a financial application interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDoafJDcd3G8iL_XVkMHUt9FBmsZzqK-JEX3gkbFv6TWo6PvVIL1XfnFl_dlQp6bJjk5ZrgaoOW4QYyxVPfvMsXCI1NB5e8x6xAPxUIWp3-sKgQfWqdGJkX_VDNs4ILhXwUWmrPzzLF9EKqydjYWxF-cv62rEfZj2cGqMCQVw4FMRCoqp1tD58X9aEvnuMRsLEFhqNlrwpx1UN7TGCPOnljOHY4MgRtn5qHEYyqr-6C62l0xYFVbyVp6sgf7ybrLA7jj_MmITiRQg"/>
+</div>
+<span class="hidden lg:block font-label-md text-label-md text-on-surface">Alex Chen</span>
+</div>
+</div>
+</header>
+<!-- Dashboard Body -->
+<div class="p-lg max-w-container-max mx-auto w-full space-y-lg">
+<!-- Summary Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-lg">
+<!-- Pemasukan -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant tonal-elevation-1 flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Pemasukan</p>
+<h3 class="text-headline-md font-headline-md font-bold text-primary mt-xs">$12.450,00</h3>
+<div class="flex items-center gap-xs mt-sm text-secondary text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12,5% dari bulan lalu</span>
+</div>
+</div>
+<div class="p-sm bg-secondary-container text-on-secondary-container rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+</div>
+<!-- Pengeluaran -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant tonal-elevation-1 flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Pengeluaran</p>
+<h3 class="text-headline-md font-headline-md font-bold text-primary mt-xs">$4.120,50</h3>
+<div class="flex items-center gap-xs mt-sm text-error text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span>+4,2% dari bulan lalu</span>
+</div>
+</div>
+<div class="p-sm bg-error-container text-on-error-container rounded-lg">
+<span class="material-symbols-outlined">shopping_cart</span>
+</div>
+</div>
+<!-- Saldo Saat Ini -->
+<div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant tonal-elevation-1 flex items-start justify-between">
+<div>
+<p class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Saldo Saat Ini</p>
+<h3 class="text-headline-md font-headline-md font-bold text-primary mt-xs">$8.329,50</h3>
+<div class="flex items-center gap-xs mt-sm text-on-surface-variant text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Diperbarui 2m lalu</span>
+</div>
+</div>
+<div class="p-sm bg-primary-container text-on-primary-container rounded-lg">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+</div>
+<!-- Target Tabungan -->
+<div class="bg-on-primary-fixed p-md rounded-xl border border-outline-variant tonal-elevation-1 flex flex-col justify-between text-on-primary">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label-sm font-label-sm text-on-primary-container uppercase tracking-wider">Target Tabungan</p>
+<h3 class="text-headline-md font-headline-md font-bold mt-xs">$2.500,00</h3>
+</div>
+<div class="p-sm bg-on-primary-fixed-variant rounded-lg text-secondary-fixed">
+<span class="material-symbols-outlined">savings</span>
+</div>
+</div>
+<div class="mt-md space-y-xs">
+<div class="flex justify-between text-label-sm">
+<span>Progres</span>
+<span>75%</span>
+</div>
+<div class="w-full h-2 bg-on-primary-fixed-variant rounded-full overflow-hidden">
+<div class="h-full bg-secondary-fixed-dim rounded-full" style="width: 75%"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Layout: Bento Style -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-lg">
+<!-- Cash Flow Area Chart (Large Area) -->
+<div class="lg:col-span-2 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant tonal-elevation-1">
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-lg gap-md">
+<div>
+<h4 class="text-headline-sm font-headline-sm font-bold text-primary">Arus Kas</h4>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Pemasukan vs Pengeluaran Oktober 2023</p>
+</div>
+<div class="flex items-center gap-sm bg-surface-container-low p-xs rounded-lg border border-outline-variant">
+<button class="px-sm py-xs bg-surface-container-lowest text-on-surface font-label-sm rounded shadow-sm">Bulanan</button>
+<button class="px-sm py-xs text-on-surface-variant font-label-sm hover:text-on-surface transition-colors">Kuartal</button>
+<button class="px-sm py-xs text-on-surface-variant font-label-sm hover:text-on-surface transition-colors">Tahunan</button>
+</div>
+</div>
+<!-- Chart Placeholder with visual elements -->
+<div class="relative h-64 w-full bg-surface-container-low rounded-lg overflow-hidden flex items-end">
+<div class="absolute inset-0 flex flex-col justify-between p-sm opacity-20 pointer-events-none">
+<div class="border-b border-outline w-full h-px"></div>
+<div class="border-b border-outline w-full h-px"></div>
+<div class="border-b border-outline w-full h-px"></div>
+<div class="border-b border-outline w-full h-px"></div>
+</div>
+<div class="w-full h-full flex items-end px-md gap-2 relative">
+<!-- Income Trace -->
+<svg class="absolute bottom-0 left-0 w-full h-4/5 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q10,70 20,75 T40,60 T60,50 T80,55 T100,40 V100 H0 Z" fill="rgba(78, 222, 163, 0.15)"></path>
+<path d="M0,80 Q10,70 20,75 T40,60 T60,50 T80,55 T100,40" fill="none" stroke="#006c49" stroke-width="2"></path>
+</svg>
+<!-- Expense Trace -->
+<svg class="absolute bottom-0 left-0 w-full h-4/5 overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,90 Q10,85 20,88 T40,82 T60,85 T80,78 T100,82 V100 H0 Z" fill="rgba(239, 68, 68, 0.1)"></path>
+<path d="M0,90 Q10,85 20,88 T40,82 T60,85 T80,78 T100,82" fill="none" stroke="#ef4444" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+<div class="mt-md flex justify-center gap-lg">
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-secondary"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Pemasukan</span>
+</div>
+<div class="flex items-center gap-xs">
+<div class="w-3 h-3 rounded-full bg-on-tertiary-container"></div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Pengeluaran</span>
+</div>
+</div>
+</div>
+<!-- Transaksi Terakhir (List Area) -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant tonal-elevation-1 flex flex-col">
+<div class="flex items-center justify-between mb-lg">
+<h4 class="text-headline-sm font-headline-sm font-bold text-primary">Transaksi Terakhir</h4>
+<button class="text-secondary font-label-md text-label-md hover:underline">Lihat Semua</button>
+</div>
+<div class="space-y-md overflow-y-auto custom-scrollbar pr-xs">
+<!-- Transaction Item -->
+<div class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border-b border-surface-container last:border-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">shopping_bag</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Amazon Marketplace</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Elektronik • 24 Okt</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-error">-$124,99</span>
+</div>
+<div class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border-b border-surface-container last:border-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Gaji Bulanan</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Transfer Langsung • 22 Okt</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-secondary">+$6.200,00</span>
+</div>
+<div class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border-b border-surface-container last:border-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Makan Malam Blue Ginger</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Kuliner • 21 Okt</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-error">-$85,20</span>
+</div>
+<div class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border-b border-surface-container last:border-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">electric_bolt</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Tagihan Listrik Kota</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Tagihan • 20 Okt</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-error">-$142,00</span>
+</div>
+<div class="flex items-center justify-between p-sm hover:bg-surface-container-low rounded-lg transition-colors cursor-pointer border-b border-surface-container last:border-0">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">SPBU Shell</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Transportasi • 19 Okt</p>
+</div>
+</div>
+<span class="font-label-md text-label-md text-error">-$54,00</span>
+</div>
+</div>
+<button class="mt-auto w-full py-sm border border-outline-variant rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container transition-colors">
+                        Unduh Laporan
+                    </button>
+</div>
+</div>
+<!-- Bottom Row: Additional Context -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+<!-- Kategori Teratas -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant tonal-elevation-1">
+<h4 class="text-headline-sm font-headline-sm font-bold text-primary mb-md">Kategori Teratas</h4>
+<div class="space-y-sm">
+<div>
+<div class="flex justify-between text-label-md mb-xs">
+<span>Tempat Tinggal</span>
+<span class="font-bold">42%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 42%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-xs">
+<span>Makan &amp; Minum</span>
+<span class="font-bold">28%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full">
+<div class="h-full bg-secondary rounded-full" style="width: 28%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-label-md mb-xs">
+<span>Langganan</span>
+<span class="font-bold">15%</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full">
+<div class="h-full bg-secondary-fixed-dim rounded-full" style="width: 15%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Financial Health Card -->
+<div class="bg-secondary-container p-lg rounded-xl border border-outline-variant tonal-elevation-1 flex items-center gap-lg">
+<div class="w-20 h-20 rounded-full border-4 border-on-secondary-fixed-variant flex items-center justify-center text-on-secondary-fixed-variant font-bold text-headline-sm">
+                        84
+                    </div>
+<div>
+<h4 class="font-bold text-on-secondary-container">Skor Finansial</h4>
+<p class="text-body-sm text-on-secondary-fixed-variant">Luar biasa! Kamu berada di 15% penabung teratas bulan ini.</p>
+<a class="mt-sm inline-block text-label-md font-bold underline" href="#">Tingkatkan Skor</a>
+</div>
+</div>
+<!-- Help/CTA -->
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant border-dashed flex flex-col justify-center items-center text-center">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant mb-sm">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<h4 class="font-bold text-primary">Butuh Saran Finansial?</h4>
+<p class="text-body-sm text-on-surface-variant mb-md">Bicara dengan CuanAI tentang kebiasaan belanjamu.</p>
+<button class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md">Mulai Obrolan</button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 bg-surface border-t border-outline-variant flex justify-around items-center py-sm z-50 shadow-lg">
+<a class="flex flex-col items-center gap-xs text-secondary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Dash</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="text-[10px]">Tambah</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+<span class="text-[10px]">Riwayat</span>
+</a>
+<a class="flex flex-col items-center gap-xs text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px]">Profil</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions and simple hover effects
+        document.querySelectorAll('.tonal-elevation-1').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'transform 0.2s ease-out';
+                card.style.boxShadow = '0px 10px 15px -3px rgba(0,0,0,0.08)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+                card.style.boxShadow = '0px 1px 3px rgba(0,0,0,0.05), 0px 1px 2px rgba(0,0,0,0.03)';
+            });
+        });
+
+        // Simulating search focus interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('border-secondary', 'ring-2', 'ring-secondary/20');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.classList.remove('border-secondary', 'ring-2', 'ring-secondary/20');
+            });
+        }
+    </script>
+</body></html>

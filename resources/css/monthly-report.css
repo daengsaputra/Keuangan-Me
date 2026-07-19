@@ -1,0 +1,30 @@
+.monthly-cash-flow-panel {
+    margin-bottom: 20px;
+}
+
+.daily-chart-scroll {
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+.daily-bar-chart {
+    gap: 5px;
+    min-width: 820px;
+}
+
+.daily-bar-chart .bar-group {
+    min-width: 20px;
+}
+
+.daily-bar-chart .bars {
+    gap: 2px;
+}
+
+.daily-bar-chart .bar {
+    width: 7px;
+}
+
+.daily-bar-chart .expense-bar {
+    background: var(--red);
+    opacity: .72;
+}

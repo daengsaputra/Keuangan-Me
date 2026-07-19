@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CuanTracker - Laporan Bulanan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#474747",
+                        "background": "#fcf8fb",
+                        "tertiary": "#000000",
+                        "on-secondary-fixed-variant": "#00458e",
+                        "on-surface-variant": "#4c4546",
+                        "on-error-container": "#93000a",
+                        "outline": "#7e7576",
+                        "surface-tint": "#5e5e5e",
+                        "surface-variant": "#e4e2e4",
+                        "inverse-primary": "#c6c6c6",
+                        "outline-variant": "#cfc4c5",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#303032",
+                        "tertiary-fixed-dim": "#c6c6c8",
+                        "surface": "#fcf8fb",
+                        "on-tertiary-fixed-variant": "#454749",
+                        "surface-gray": "#F5F5F7",
+                        "on-surface": "#1b1b1d",
+                        "text-primary": "#1D1D1F",
+                        "secondary": "#005cba",
+                        "on-primary-container": "#848484",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#aac7ff",
+                        "surface-container-highest": "#e4e2e4",
+                        "on-secondary": "#ffffff",
+                        "inverse-on-surface": "#f3f0f2",
+                        "surface-container": "#f0edef",
+                        "text-secondary": "#86868B",
+                        "primary-container": "#1b1b1b",
+                        "primary": "#000000",
+                        "surface-dim": "#dcd9dc",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#fcf8fb",
+                        "on-secondary-container": "#002d61",
+                        "surface-container-high": "#eae7ea",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-tertiary-fixed": "#1a1c1d",
+                        "tertiary-container": "#1a1c1d",
+                        "link-blue": "#0066CC",
+                        "tertiary-fixed": "#e2e2e4",
+                        "secondary-container": "#5095fe",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001b3e",
+                        "on-background": "#1b1b1d",
+                        "secondary-fixed": "#d7e3ff",
+                        "on-tertiary-container": "#838486",
+                        "surface-container-low": "#f6f3f5",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#e2e2e2"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "20px",
+                        "stack-lg": "32px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "stack-sm": "8px",
+                        "margin-desktop": "40px",
+                        "section-gap": "80px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display-lg": ["56px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["32px", {"lineHeight": "1.25", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+                        "body-lg": ["19px", {"lineHeight": "1.5", "letterSpacing": "-0.01em", "fontWeight": "400"}],
+                        "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "500"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #fcf8fb; color: #1d1d1f; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .apple-shadow { box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.04), 0 2px 8px -1px rgba(0, 0, 0, 0.02); }
+        .sidebar-blur { backdrop-filter: blur(20px); background-color: rgba(255, 255, 255, 0.8); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cfc4c5; border-radius: 10px; }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 sidebar-blur border-r border-outline-variant flex flex-col p-stack-md z-50">
+<div class="flex items-center gap-3 mb-stack-lg px-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_balance_wallet</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-[20px] font-bold text-primary leading-tight">CuanTracker</h1>
+<p class="text-[11px] uppercase tracking-wider text-text-secondary font-semibold">Kesejahteraan Finansial</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar">
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-surface-container rounded-xl transition-all duration-200 font-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+            Dashboard
+        </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-surface-container rounded-xl transition-all duration-200 font-label-md" href="#">
+<span class="material-symbols-outlined">add_circle</span>
+            Transaksi
+        </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary text-on-primary font-semibold rounded-xl transition-all duration-200 font-label-md apple-shadow" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+            Laporan Bulanan
+        </a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-secondary hover:bg-surface-container rounded-xl transition-all duration-200 font-label-md" href="#">
+<span class="material-symbols-outlined">query_stats</span>
+            Laporan Tahunan
+        </a>
+</nav>
+<div class="mt-auto pt-stack-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 rounded-xl font-semibold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity mb-stack-md apple-shadow">
+<span class="material-symbols-outlined">add</span>
+            Tambah Transaksi
+        </button>
+<a class="flex items-center gap-3 px-4 py-2 text-text-secondary hover:bg-surface-container rounded-xl font-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+            Pengaturan
+        </a>
+<a class="flex items-center gap-3 px-4 py-2 text-error hover:bg-error-container/20 rounded-xl font-label-md mt-1" href="#">
+<span class="material-symbols-outlined">logout</span>
+            Keluar
+        </a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-64 flex flex-col min-h-screen">
+<!-- TopNavBar -->
+<header class="w-full top-0 sticky z-40 bg-white/80 backdrop-blur-md border-b border-outline-variant">
+<div class="flex justify-between items-center px-margin-desktop py-stack-sm max-w-container-max mx-auto h-20">
+<div class="flex items-center gap-2">
+<span class="text-headline-xl font-bold text-text-primary">Laporan Bulanan</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-secondary text-lg">search</span>
+<input class="pl-11 pr-6 py-2.5 bg-surface-gray border-none rounded-full text-sm focus:ring-2 focus:ring-primary/10 w-72 transition-all" placeholder="Cari laporan..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-surface-container p-2.5 rounded-full transition-colors relative text-text-primary">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 bg-error rounded-full border-2 border-white"></span>
+</button>
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant apple-shadow cursor-pointer">
+<img alt="Profil" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA53-ySx0z6xZvoArXQJwY4GIoFO1Mge9Zu9R3DhRiK8oiKw54EpGmc4CNWNdHMDsqDLuFr0E51tdnOpv4FBs7a2fKW89bcpKh7nVvfffbp_e7CTHsGWXB-HlZX1JDefxt4sbDCYrDPheJmIYeSxpihReT2zJeOHIQDLtsXq5ximd5MJj4Dl6Wy66DH4AMGOnRbYXpOoNF_xWtZ_UlUhrhjyyTM-dpEl73PiC7lC3Gtyu3NCmPjo4jwviagCJEYIXe9-V3rkaN2Yy0"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-margin-desktop space-y-stack-lg max-w-container-max mx-auto w-full">
+<!-- Filter & Export Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-stack-md bg-white p-stack-lg rounded-3xl apple-shadow border border-surface-variant">
+<div class="space-y-4">
+<h2 class="text-label-sm uppercase tracking-widest text-text-secondary font-bold">Periode Laporan</h2>
+<div class="flex items-center gap-4">
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-text-secondary px-1">Bulan</label>
+<select class="bg-surface-gray border-none rounded-xl px-5 py-3 font-medium text-text-primary focus:ring-2 focus:ring-primary/10 min-w-[160px] appearance-none cursor-pointer">
+<option>Januari</option><option>Februari</option><option>Maret</option><option>April</option><option>Mei</option><option>Juni</option><option>Juli</option><option selected="">Agustus</option><option>September</option><option>Oktober</option><option>November</option><option>Desember</option>
+</select>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="text-[11px] font-bold text-text-secondary px-1">Tahun</label>
+<select class="bg-surface-gray border-none rounded-xl px-5 py-3 font-medium text-text-primary focus:ring-2 focus:ring-primary/10 min-w-[120px] appearance-none cursor-pointer">
+<option>2022</option><option>2023</option><option selected="">2024</option><option>2025</option>
+</select>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-6 py-3 bg-white hover:bg-surface-container text-text-primary font-semibold rounded-xl transition-all border border-outline-variant apple-shadow">
+<span class="material-symbols-outlined text-xl">description</span>
+                    Excel
+                </button>
+<button class="flex items-center gap-2 px-6 py-3 bg-primary text-on-primary hover:opacity-90 font-semibold rounded-xl transition-all apple-shadow">
+<span class="material-symbols-outlined text-xl">picture_as_pdf</span>
+                    Ekspor PDF
+                </button>
+</div>
+</div>
+<!-- Summary Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-stack-lg">
+<!-- Pemasukan -->
+<div class="bg-white p-stack-lg rounded-3xl apple-shadow border border-surface-variant flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+<div>
+<p class="text-[13px] font-semibold text-text-secondary uppercase tracking-wider">Pemasukan</p>
+<h3 class="text-[32px] font-bold text-text-primary mt-2">Rp 12.500.000</h3>
+</div>
+<div class="mt-6 flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-600 rounded-full w-fit">
+<span class="material-symbols-outlined text-lg">trending_up</span>
+<span class="text-sm font-bold">12% vs bulan lalu</span>
+</div>
+</div>
+<!-- Pengeluaran -->
+<div class="bg-white p-stack-lg rounded-3xl apple-shadow border border-surface-variant flex flex-col justify-between hover:scale-[1.02] transition-transform duration-300">
+<div>
+<p class="text-[13px] font-semibold text-text-secondary uppercase tracking-wider">Pengeluaran</p>
+<h3 class="text-[32px] font-bold text-text-primary mt-2">Rp 4.250.000</h3>
+</div>
+<div class="mt-6 flex items-center gap-2 px-3 py-1.5 bg-red-50 text-red-600 rounded-full w-fit">
+<span class="material-symbols-outlined text-lg">trending_down</span>
+<span class="text-sm font-bold">5% vs bulan lalu</span>
+</div>
+</div>
+<!-- Total Tabungan - High Contrast Apple Style -->
+<div class="bg-primary p-stack-lg rounded-3xl apple-shadow text-on-primary flex flex-col justify-between relative overflow-hidden hover:scale-[1.02] transition-transform duration-300 group">
+<div class="relative z-10">
+<p class="text-[13px] font-semibold text-surface-variant/80 uppercase tracking-wider">Tabungan Bersih</p>
+<h3 class="text-[40px] font-bold mt-2">Rp 8.250.000</h3>
+</div>
+<div class="relative z-10 mt-6 flex items-center gap-2 text-sm font-semibold text-white/90">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span>Rasio Menabung: 66%</span>
+</div>
+<!-- Subtle Gradient Glow -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-700"></div>
+</div>
+</div>
+<!-- Detailed Transaction Table - High Contrast Typography -->
+<div class="bg-white rounded-[2rem] apple-shadow border border-surface-variant overflow-hidden">
+<div class="px-stack-lg py-stack-md border-b border-surface-variant flex justify-between items-center bg-surface-gray/30">
+<h3 class="text-headline-lg font-bold text-text-primary">Rincian Transaksi</h3>
+<span class="px-4 py-1.5 rounded-full bg-white text-[12px] font-bold text-text-secondary border border-outline-variant apple-shadow">32 Transaksi</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="bg-white">
+<th class="px-stack-lg py-6 text-left text-[11px] font-bold text-text-secondary uppercase tracking-[0.1em]">Tanggal</th>
+<th class="px-stack-lg py-6 text-left text-[11px] font-bold text-text-secondary uppercase tracking-[0.1em]">Kategori</th>
+<th class="px-stack-lg py-6 text-left text-[11px] font-bold text-text-secondary uppercase tracking-[0.1em]">Deskripsi</th>
+<th class="px-stack-lg py-6 text-left text-[11px] font-bold text-text-secondary uppercase tracking-[0.1em]">Tipe</th>
+<th class="px-stack-lg py-6 text-right text-[11px] font-bold text-text-secondary uppercase tracking-[0.1em]">Jumlah</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-variant">
+<!-- Rows -->
+<tr class="hover:bg-surface-gray/50 transition-colors group">
+<td class="px-stack-lg py-5 text-sm font-medium text-text-primary">15 Agt 2024</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-surface-gray text-text-primary border border-outline-variant">Gaji Utama</span>
+</td>
+<td class="px-stack-lg py-5 text-sm text-text-secondary">Gaji Bulanan Agustus</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1.5 text-green-600 font-bold text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> Masuk
+                                </div>
+</td>
+<td class="px-stack-lg py-5 text-right font-bold text-text-primary text-base">Rp 10.000.000</td>
+</tr>
+<tr class="hover:bg-surface-gray/50 transition-colors group">
+<td class="px-stack-lg py-5 text-sm font-medium text-text-primary">16 Agt 2024</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-surface-gray text-text-primary border border-outline-variant">Makanan</span>
+</td>
+<td class="px-stack-lg py-5 text-sm text-text-secondary">Makan Siang di Menteng</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1.5 text-red-500 font-bold text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> Keluar
+                                </div>
+</td>
+<td class="px-stack-lg py-5 text-right font-bold text-text-primary text-base">Rp 250.000</td>
+</tr>
+<tr class="hover:bg-surface-gray/50 transition-colors group">
+<td class="px-stack-lg py-5 text-sm font-medium text-text-primary">17 Agt 2024</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-surface-gray text-text-primary border border-outline-variant">Transportasi</span>
+</td>
+<td class="px-stack-lg py-5 text-sm text-text-secondary">Bahan Bakar Mobil</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1.5 text-red-500 font-bold text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">arrow_upward</span> Keluar
+                                </div>
+</td>
+<td class="px-stack-lg py-5 text-right font-bold text-text-primary text-base">Rp 500.000</td>
+</tr>
+<tr class="hover:bg-surface-gray/50 transition-colors group">
+<td class="px-stack-lg py-5 text-sm font-medium text-text-primary">20 Agt 2024</td>
+<td class="px-stack-lg py-5">
+<span class="px-3 py-1 rounded-full text-[11px] font-bold bg-surface-gray text-text-primary border border-outline-variant">Freelance</span>
+</td>
+<td class="px-stack-lg py-5 text-sm text-text-secondary">Proyek Desain UI X</td>
+<td class="px-stack-lg py-5">
+<div class="flex items-center gap-1.5 text-green-600 font-bold text-[11px] uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm">arrow_downward</span> Masuk
+                                </div>
+</td>
+<td class="px-stack-lg py-5 text-right font-bold text-text-primary text-base">Rp 2.500.000</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="px-stack-lg py-6 bg-surface-gray/30 border-t border-surface-variant flex justify-between items-center">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center hover:bg-white rounded-full transition-all border border-transparent hover:border-outline-variant apple-shadow">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<span class="text-[13px] font-semibold text-text-secondary px-2">Halaman 1 dari 4</span>
+<button class="w-10 h-10 flex items-center justify-center hover:bg-white rounded-full transition-all border border-transparent hover:border-outline-variant apple-shadow">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="text-right">
+<span class="text-[11px] font-bold text-text-secondary uppercase tracking-widest block">Saldo Bersih Agustus</span>
+<span class="text-xl font-bold text-text-primary">Rp 8.250.000</span>
+</div>
+</div>
+</div>
+<!-- Visual Analytics & Status -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg pb-20">
+<!-- Sophisticated Bar Chart -->
+<div class="bg-white p-stack-lg rounded-[2rem] apple-shadow border border-surface-variant">
+<h4 class="text-headline-lg font-bold mb-8">Distribusi Pengeluaran</h4>
+<div class="h-64 flex items-end justify-between gap-6 px-4">
+<div class="w-full flex flex-col items-center gap-4">
+<div class="w-full bg-primary rounded-2xl transition-all duration-700 hover:opacity-80" style="height: 85%;"></div>
+<span class="text-[11px] font-bold text-text-secondary uppercase">Makan</span>
+</div>
+<div class="w-full flex flex-col items-center gap-4">
+<div class="w-full bg-primary/40 rounded-2xl transition-all duration-700 hover:opacity-80" style="height: 45%;"></div>
+<span class="text-[11px] font-bold text-text-secondary uppercase">Trans</span>
+</div>
+<div class="w-full flex flex-col items-center gap-4">
+<div class="w-full bg-primary/70 rounded-2xl transition-all duration-700 hover:opacity-80" style="height: 65%;"></div>
+<span class="text-[11px] font-bold text-text-secondary uppercase">Tagihan</span>
+</div>
+<div class="w-full flex flex-col items-center gap-4">
+<div class="w-full bg-primary/20 rounded-2xl transition-all duration-700 hover:opacity-80" style="height: 35%;"></div>
+<span class="text-[11px] font-bold text-text-secondary uppercase">Lainnya</span>
+</div>
+</div>
+</div>
+<!-- Report Status Card -->
+<div class="bg-white p-stack-lg rounded-[2rem] apple-shadow border border-surface-variant flex flex-col items-center justify-center text-center space-y-6">
+<div class="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center text-green-600 apple-shadow">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'wght' 600;">verified</span>
+</div>
+<div>
+<h4 class="text-headline-lg font-bold text-text-primary">Laporan Siap</h4>
+<p class="text-body-md text-text-secondary mt-2 max-w-sm">Data keuangan Anda untuk periode Agustus 2024 telah diverifikasi dan siap untuk diarsip atau dicetak.</p>
+</div>
+<div class="flex gap-4 pt-2 w-full max-w-xs">
+<button class="flex-1 text-text-primary font-bold text-sm px-6 py-3.5 border border-outline-variant rounded-xl hover:bg-surface-gray transition-colors apple-shadow">Arsipkan</button>
+<button class="flex-1 text-on-primary bg-primary font-bold text-sm px-6 py-3.5 rounded-xl hover:opacity-90 transition-opacity apple-shadow">Cetak</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+    // Micro-interactions for table rows
+    document.querySelectorAll('tr').forEach(row => {
+        row.addEventListener('mouseenter', () => {
+            row.style.transform = 'scale(1.005)';
+            row.style.zIndex = '10';
+            row.style.position = 'relative';
+        });
+        row.addEventListener('mouseleave', () => {
+            row.style.transform = 'scale(1)';
+        });
+    });
+
+    // Horizontal scroll for table on mobile
+    const tableContainer = document.querySelector('.overflow-x-auto');
+    if (tableContainer) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        tableContainer.addEventListener('mousedown', (e) => {
+            isDown = true;
+            startX = e.pageX - tableContainer.offsetLeft;
+            scrollLeft = tableContainer.scrollLeft;
+        });
+        tableContainer.addEventListener('mouseleave', () => { isDown = false; });
+        tableContainer.addEventListener('mouseup', () => { isDown = false; });
+        tableContainer.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - tableContainer.offsetLeft;
+            const walk = (x - startX) * 2;
+            tableContainer.scrollLeft = scrollLeft - walk;
+        });
+    }
+</script>
+</body></html>
