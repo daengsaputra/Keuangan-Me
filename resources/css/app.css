@@ -1,17 +1,17 @@
 /* Google Fonts di-import melalui Blade */
 :root {
-    --primary: #134E4A;
-    --primary-hover: #0F3D3A;
-    --secondary: #E11D48;
-    --background: #FDF2E9;
+    --primary: #111111;
+    --primary-hover: #2D2D30;
+    --secondary: #0066CC;
+    --background: #F7F7F8;
     --surface: #FFFFFF;
 
-    --border: #E7E5E4;
-    --text: #1F2937;
+    --border: #E4E4E7;
+    --text: #18181B;
 
-    --success: #16A34A;
+    --success: #0F9F6E;
     --warning: #D97706;
-    --danger: #DC2626;
+    --danger: #DC4655;
 }
 
 body {
@@ -95,7 +95,7 @@ body {
     width: 40px;
     height: 40px;
     place-items: center;
-    border-radius: 8px;
+    border-radius: 12px;
     background: var(--primary);
     color: #fff;
     font-weight: 800;
@@ -127,7 +127,7 @@ body {
     align-items: center;
     gap: 12px;
     padding: 11px 13px;
-    border-radius: 8px;
+    border-radius: 11px;
     color: #475569;
     font-size: 14px;
     font-weight: 700;
@@ -221,7 +221,7 @@ body {
 .panel,
 .stat-card {
     border: 1px solid rgba(231, 229, 228, .9);
-    border-radius: 8px;
+    border-radius: 18px;
     background: #fff;
     box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
 }
@@ -405,7 +405,7 @@ td small {
 
 .alert {
     margin-bottom: 20px;
-    border-radius: 8px;
+    border-radius: 12px;
     padding: 13px 16px;
 }
 
@@ -428,9 +428,9 @@ td small {
 .auth-page {
     min-height: 100vh;
     background:
-        radial-gradient(circle at 18% 20%, rgba(19, 78, 74, .2), transparent 26rem),
-        radial-gradient(circle at 82% 78%, rgba(225, 29, 72, .14), transparent 24rem),
-        linear-gradient(135deg, #fff7ed 0%, #f8fafc 54%, #f0fdfa 100%);
+        radial-gradient(circle at 18% 20%, rgba(0, 102, 204, .12), transparent 26rem),
+        radial-gradient(circle at 82% 78%, rgba(15, 159, 110, .1), transparent 24rem),
+        linear-gradient(135deg, #f7f7f8 0%, #ffffff 54%, #f4f4f5 100%);
 }
 
 .auth-shell {
@@ -442,10 +442,10 @@ td small {
 
 .auth-card {
     width: min(100%, 430px);
-    border: 1px solid rgba(19, 78, 74, .14);
-    border-radius: 8px;
+    border: 1px solid rgba(228, 228, 231, .9);
+    border-radius: 18px;
     background: rgba(255, 255, 255, .92);
-    box-shadow: 0 28px 80px rgba(15, 61, 58, .18);
+    box-shadow: 0 28px 80px rgba(24, 24, 27, .12);
     padding: 32px;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -481,9 +481,9 @@ td small {
     display: grid;
     min-height: 48px;
     place-items: center;
-    border: 1px solid rgba(19, 78, 74, .18);
-    border-radius: 8px;
-    background: #f0fdfa;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: #f4f4f5;
     color: var(--primary);
     font-size: 18px;
     letter-spacing: 0;
@@ -520,9 +520,9 @@ td small {
     inset: 0;
     z-index: -2;
     background:
-        radial-gradient(circle at 20% 20%, rgba(19, 78, 74, .22), transparent 28rem),
-        radial-gradient(circle at 85% 80%, rgba(225, 29, 72, .16), transparent 24rem),
-        linear-gradient(135deg, #fff7ed 0%, #f0fdfa 52%, #fff1f2 100%);
+        radial-gradient(circle at 20% 20%, rgba(0, 102, 204, .12), transparent 28rem),
+        radial-gradient(circle at 85% 80%, rgba(15, 159, 110, .1), transparent 24rem),
+        linear-gradient(135deg, #f7f7f8 0%, #ffffff 52%, #f4f4f5 100%);
 }
 
 .transaction-page::after {
@@ -558,9 +558,9 @@ td small {
 .transaction-card {
     width: 100%;
     background: rgba(255, 255, 255, .92);
-    border: 1px solid rgba(19, 78, 74, .14);
-    border-radius: 8px;
-    box-shadow: 0 28px 80px rgba(15, 61, 58, .18);
+    border: 1px solid rgba(228, 228, 231, .9);
+    border-radius: 18px;
+    box-shadow: 0 28px 80px rgba(24, 24, 27, .12);
     padding: clamp(24px, 4vw, 42px);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
@@ -592,8 +592,11 @@ td small {
 .type-switch {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: 0;
     margin-bottom: 22px;
+    border-radius: 13px;
+    background: #f2f2f4;
+    padding: 4px;
 }
 
 .type-switch label {
@@ -611,19 +614,18 @@ td small {
     min-height: 48px;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: #f8fafc;
+    border: 0;
+    border-radius: 11px;
+    background: transparent;
     font-weight: 700;
     color: #475569;
     transition: .18s ease;
 }
 
 .type-switch input:checked + span {
-    border-color: var(--primary);
-    background: var(--primary);
-    color: #fff;
-    box-shadow: 0 10px 24px rgba(19, 78, 74, .18);
+    background: #fff;
+    color: var(--text);
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .08);
 }
 
 .form-grid {
@@ -648,7 +650,7 @@ td small {
     width: 100%;
     min-height: 48px;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 11px;
     background: #fff;
     padding: 0 14px;
     color: var(--text);
@@ -659,8 +661,8 @@ td small {
 
 .field input:focus,
 .field select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px rgba(19, 78, 74, .12);
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(0, 102, 204, .1);
     transform: scale(1.01);
 }
 
@@ -682,7 +684,7 @@ td small {
     min-height: 46px;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 11px;
     padding: 0 18px;
     font-weight: 800;
     text-decoration: none;
