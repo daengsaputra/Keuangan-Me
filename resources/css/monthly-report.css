@@ -14,6 +14,20 @@
 
 .daily-bar-chart .bar-group {
     min-width: 20px;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 8px;
+}
+
+.daily-bar-chart .bar-group:hover,
+.daily-bar-chart .bar-group:focus-visible,
+.daily-bar-chart .bar-group.selected {
+    background: #f4f4f5;
+    outline: none;
 }
 
 .daily-bar-chart .bars {
@@ -25,6 +39,110 @@
 }
 
 .daily-bar-chart .expense-bar {
-    background: var(--red);
+    background: var(--danger);
     opacity: .72;
+}
+
+.chart-value-card {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+    border-top: 1px solid var(--border);
+    padding-top: 18px;
+}
+
+.chart-value-card div,
+.meal-result {
+    border-radius: 11px;
+    background: #f7f7f8;
+    padding: 14px;
+}
+
+.chart-value-card span,
+.meal-result span {
+    display: block;
+    margin-bottom: 5px;
+    color: #71717a;
+    font-size: 11px;
+}
+
+.meal-monitor {
+    margin-bottom: 20px;
+}
+
+.meal-calculator {
+    display: grid;
+    grid-template-columns: minmax(210px, .8fr) 2fr;
+    gap: 20px;
+    margin-top: 22px;
+}
+
+.meal-input label {
+    display: grid;
+    gap: 8px;
+    color: #3f3f46;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.meal-input-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: start;
+    gap: 12px;
+}
+
+.meal-input-grid small {
+    grid-column: 1 / -1;
+}
+
+.meal-input input {
+    width: 100%;
+    min-height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    padding: 0 14px;
+    font: inherit;
+}
+
+.meal-input small {
+    display: block;
+    margin-top: 9px;
+    color: #71717a;
+    line-height: 1.5;
+}
+
+.meal-results {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.meal-result strong {
+    font-size: 17px;
+}
+
+.meal-progress {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 760px) {
+    .chart-value-card,
+    .meal-calculator,
+    .meal-results {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-progress {
+        grid-column: auto;
+    }
+
+    .meal-input-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .meal-input-grid small {
+        grid-column: auto;
+    }
 }

@@ -6,13 +6,14 @@
     <title>Login - Keuangan Me</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="auth-page">
+<body class="auth-page login-page" style="--login-background-image: url('{{ asset('images/login-paper-background.png') }}')">
     <main class="auth-shell">
         <section class="auth-card">
             <div class="auth-heading">
                 <span class="brand-mark">K</span>
                 <p class="eyebrow">LOGIN DASHBOARD</p>
-                <h1>Masuk ke Keuangan Me</h1>
+                <h1>Banx Money</h1>
+                <p class="app-description">Kelola pemasukan, pengeluaran, dan rencana keuangan dalam satu tempat. <span>Versi 1.0</span></p>
             </div>
 
             @if (session('success'))
@@ -24,7 +25,7 @@
 
                 <label class="field full">
                     <span>Username</span>
-                    <input name="username" value="{{ old('username') }}" placeholder="daeng atau naufal" required autofocus>
+                    <input name="username" value="{{ old('username') }}" placeholder="Masukkan Username" required autofocus>
                     @error('username')<small>{{ $message }}</small>@enderror
                 </label>
 
@@ -48,7 +49,6 @@
 
             <div class="auth-help">
                 <a href="{{ route('password.reset') }}">Reset password</a>
-                <span>daeng: 12345 | naufal: 54321</span>
             </div>
         </section>
     </main>

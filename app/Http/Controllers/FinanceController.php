@@ -17,6 +17,10 @@ class FinanceController extends Controller
         $expense = (float) $transactions->where('type', 'expense')->sum('amount');
         $monthlyExpense = (float) $transactions->where('type', 'expense')
             ->whereBetween('transaction_date', [now()->startOfMonth(), now()->endOfMonth()])->sum('amount');
+        $monthlyFoodSpent = (float) $transactions->where('type', 'expense')
+            ->whereBetween('transaction_date', [now()->startOfMonth(), now()->endOfMonth()])
+            ->filter(fn ($item) => mb_strtolower($item->category) === 'makanan')
+            ->sum('amount');
 
         $months = collect(range(5, 0))->map(function (int $offset) use ($transactions) {
             $date = now()->subMonths($offset);
@@ -29,7 +33,7 @@ class FinanceController extends Controller
             ];
         });
 
-        return view('dashboard', compact('transactions', 'income', 'expense', 'monthlyExpense', 'months'));
+        return view('dashboard', compact('transactions', 'income', 'expense', 'monthlyExpense', 'monthlyFoodSpent', 'months'));
     }
 
     public function create(): View
@@ -61,7 +65,10 @@ class FinanceController extends Controller
 
     public function monthly(Request $request): View
     {
-        $month = Carbon::createFromFormat('Y-m', (string) $request->string('bulan', now()->format('Y-m')))->startOfMonth();
+        $requestedMonth = (string) $request->input('bulan', now()->format('Y-m'));
+        $month = preg_match('/^\d{4}-(0[1-9]|1[0-2])$/', $requestedMonth)
+            ? Carbon::createFromFormat('!Y-m', $requestedMonth)->startOfMonth()
+            : now()->startOfMonth();
         $transactions = Transaction::whereBetween('transaction_date', [$month, $month->copy()->endOfMonth()])
             ->latest('transaction_date')->get();
 
