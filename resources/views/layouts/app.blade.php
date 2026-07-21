@@ -33,7 +33,7 @@
     </aside>
     <header class="mobile-header">
         <a class="brand" href="{{ route('dashboard') }}"><span class="brand-mark">K</span><strong>Keuangan Me</strong></a>
-        <button class="menu-button" data-menu aria-label="Buka menu">☰</button>
+        <button class="menu-button" data-menu aria-label="Buka menu" aria-controls="sidebar" aria-expanded="false">☰</button>
     </header>
     <main class="main-content">
         @if (session('success'))

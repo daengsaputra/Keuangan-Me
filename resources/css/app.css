@@ -757,7 +757,11 @@ td small {
     .transaction-page .sidebar {
         filter: none;
         opacity: 1;
-        transform: none;
+        transform: translateX(-100%);
+    }
+
+    .transaction-page .sidebar.open {
+        transform: translateX(0);
     }
 
     .transaction-page .main-content {
