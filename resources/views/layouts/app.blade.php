@@ -6,8 +6,9 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Keuangan Me')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 </head>
-<body>
+<body class="{{ request()->routeIs('transactions.create') ? 'transaction-page' : '' }}">
     <aside class="sidebar" id="sidebar">
         <a class="brand" href="{{ route('dashboard') }}">
             <span class="brand-mark">K</span>
@@ -20,7 +21,15 @@
             <a class="{{ request()->routeIs('reports.yearly') ? 'active' : '' }}" href="{{ route('reports.yearly') }}"><span>⌁</span>Laporan Tahunan</a>
         </nav>
         <a class="primary-button sidebar-button" href="{{ route('transactions.create') }}">＋ Tambah Transaksi</a>
-        <div class="profile"><span class="avatar">BM</span><span><strong>Banx Me</strong><small>Pengelola keuangan</small></span></div>
+        <div class="profile">
+            <span class="avatar">{{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 2)) }}</span>
+            <span><strong>{{ auth()->user()?->name ?? 'User' }}</strong><small>Pengelola keuangan</small></span>
+        </div>
+        <a class="secondary-button reset-link" href="{{ route('password.reset') }}">Reset Password</a>
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button class="secondary-button logout-button">Logout</button>
+        </form>
     </aside>
     <header class="mobile-header">
         <a class="brand" href="{{ route('dashboard') }}"><span class="brand-mark">K</span><strong>Keuangan Me</strong></a>
