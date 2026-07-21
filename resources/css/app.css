@@ -714,13 +714,21 @@ td small {
 
 @media (max-width: 760px) {
     .sidebar {
-        width: 280px;
-        transform: translateX(-100%);
-        transition: .25s ease;
+        width: min(280px, calc(100vw - 48px));
+        max-width: 100%;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate3d(-105%, 0, 0);
+        transition: transform .25s ease, visibility 0s linear .25s;
     }
 
     .sidebar.open {
-        transform: translateX(0);
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0);
+        transition-delay: 0s;
         box-shadow: 20px 0 60px rgba(15, 23, 42, .16);
     }
 
@@ -757,24 +765,33 @@ td small {
     .transaction-page .sidebar {
         filter: none;
         opacity: 1;
-        transform: translateX(-100%);
+        transform: translate3d(-105%, 0, 0);
     }
 
     .transaction-page .sidebar.open {
-        transform: translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 
     .transaction-page .main-content {
-        padding: 86px 16px 24px;
+        min-height: calc(100dvh - 68px);
+        place-items: start center;
+        padding: 20px 16px 32px;
     }
 
     .transaction-stage {
         animation-name: transactionZoomMobile;
     }
 
-    .form-grid,
-    .type-switch {
+    .form-grid {
         grid-template-columns: 1fr;
+    }
+
+    .transaction-card {
+        padding: 22px 18px;
+    }
+
+    .transaction-heading {
+        margin-bottom: 20px;
     }
 
     .form-actions {
