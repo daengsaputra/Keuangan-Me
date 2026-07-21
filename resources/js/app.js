@@ -41,26 +41,35 @@ const rupiah = new Intl.NumberFormat('id-ID', {
 document.querySelectorAll('[data-interactive-chart]').forEach((chart) => {
     const chartButtons = chart.querySelectorAll('[data-chart-item]');
 
+    const hideTooltips = () => {
+        chartButtons.forEach((item) => {
+            item.classList.remove('selected');
+            item.blur();
+        });
+    };
+
     const positionTooltip = (button) => {
         const tooltip = button.querySelector('.bar-tooltip');
         if (!tooltip) return;
 
+        const boundary = button.closest('.daily-chart-scroll') || chart;
+        const boundaryRect = boundary.getBoundingClientRect();
         const buttonRect = button.getBoundingClientRect();
         const tooltipWidth = tooltip.offsetWidth;
-        const tooltipHeight = tooltip.offsetHeight;
         const buttonCenter = buttonRect.left + (buttonRect.width / 2);
         const idealLeft = buttonCenter - (tooltipWidth / 2);
-        const safeLeft = Math.max(8, Math.min(idealLeft, window.innerWidth - tooltipWidth - 8));
-        const safeTop = Math.max(8, buttonRect.top - tooltipHeight - 10);
-        const arrowLeft = Math.max(14, Math.min(buttonCenter - safeLeft, tooltipWidth - 14));
+        const safeLeft = Math.max(boundaryRect.left + 8, Math.min(idealLeft, boundaryRect.right - tooltipWidth - 8));
+        const shift = safeLeft - idealLeft;
 
-        tooltip.style.left = `${safeLeft}px`;
-        tooltip.style.top = `${safeTop}px`;
-        tooltip.style.setProperty('--arrow-left', `${arrowLeft}px`);
+        tooltip.style.setProperty('--tooltip-shift', `${shift}px`);
+        tooltip.style.setProperty('--arrow-shift', `${-shift}px`);
     };
 
     chartButtons.forEach((button) => {
         button.addEventListener('pointerenter', () => positionTooltip(button));
+        button.addEventListener('pointerleave', (event) => {
+            if (event.pointerType === 'mouse') hideTooltips();
+        });
         button.addEventListener('focus', () => positionTooltip(button));
         button.addEventListener('click', () => {
             chartButtons.forEach((item) => item.classList.remove('selected'));
@@ -74,9 +83,19 @@ document.querySelectorAll('[data-interactive-chart]').forEach((chart) => {
         if (selected) positionTooltip(selected);
     });
 
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('[data-chart-item]')) hideTooltips();
+    });
+
+    let scrollFrame;
     document.addEventListener('scroll', () => {
-        const selected = chart.querySelector('[data-chart-item].selected');
-        if (selected) positionTooltip(selected);
+        cancelAnimationFrame(scrollFrame);
+        scrollFrame = requestAnimationFrame(() => {
+            const activeButton = chart.querySelector('[data-chart-item].selected')
+                || chart.querySelector('[data-chart-item]:hover');
+
+            if (activeButton) positionTooltip(activeButton);
+        });
     }, true);
 });
 
