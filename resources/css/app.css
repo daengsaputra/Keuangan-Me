@@ -14,6 +14,7 @@
     --success: #1a7f37;
     --warning: #b98300;
     --danger: #cf222e;
+    --transaksi:#01fff2;
 }
 
 body {
@@ -533,6 +534,16 @@ td small {
     background: #be3444;
 }
 
+.transaksi-button:hover {
+    border-color: #34be52;
+    background: #34be46;
+}
+
+.reset-link:hover {
+    border-color: #34be52;
+    background: #34be46;
+}
+
 .auth-page {
     min-height: 100vh;
     background:
@@ -836,6 +847,7 @@ td small {
 }
 
 .primary-button,
+.transaksi-button,
 .secondary-button {
     display: inline-flex;
     min-height: 44px;
@@ -851,6 +863,7 @@ td small {
 }
 
 .primary-button:hover,
+.transaksi-button:hover,
 .secondary-button:hover {
     transform: translateY(-1px);
 }
@@ -860,6 +873,15 @@ td small {
     color: #fff;
     box-shadow: 0 8px 20px rgba(17, 24, 39, .14);
 }
+
+.transaksi-button {
+    background: linear-gradient(135deg, #01fdf1 0%, #01fdf1 100%);
+    color: #0a0a0a;
+    box-shadow: 0 8px 20px rgba(17, 24, 39, .14);
+}
+
+
+
 
 .secondary-button {
     background: #fff;

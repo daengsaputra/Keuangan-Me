@@ -20,7 +20,7 @@
             <a class="{{ request()->routeIs('reports.monthly') ? 'active' : '' }}" href="{{ route('reports.monthly') }}"><span>▤</span>Laporan Bulanan</a>
             <a class="{{ request()->routeIs('reports.yearly') ? 'active' : '' }}" href="{{ route('reports.yearly') }}"><span>⌁</span>Laporan Tahunan</a>
         </nav>
-        <a class="primary-button sidebar-button" href="{{ route('transactions.create') }}">＋ Tambah Transaksi</a>
+        <a class="transaksi-button sidebar-button" href="{{ route('transactions.create') }}">＋ Tambah Transaksi</a>
         <div class="profile">
             <span class="avatar">{{ strtoupper(substr(auth()->user()?->name ?? 'U', 0, 2)) }}</span>
             <span><strong>{{ auth()->user()?->name ?? 'User' }}</strong><small>Pengelola keuangan</small></span>
